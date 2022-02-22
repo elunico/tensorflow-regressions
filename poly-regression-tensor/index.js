@@ -31,14 +31,16 @@ function loss(pred, label) {
   return pred.sub(label).square().mean();
 }
 
-function mouseDragged() {
-  mousePressed();
+function mouseDragged(event) {
+  return mousePressed(event);
 }
 
-function mousePressed() {
+function mousePressed(event) {
   if (mouseX > width || mouseX < 0 || mouseY > height || mouseY < 0) return;
   xs.push(mouseX / (width / 2) - 1);
   ys.push(mouseY / (height / 2) - 1);
+  event.preventDefault();
+  return false; // preventDefault
 }
 
 function draw() {
