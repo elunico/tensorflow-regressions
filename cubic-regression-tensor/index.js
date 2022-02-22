@@ -1,7 +1,7 @@
 const xs = [];
 const ys = [];
 
-let a, b, c;
+let a, b, c, d;
 
 let learningRate = 0.2;
 let learningSlider;
@@ -15,6 +15,7 @@ function setup() {
   a = tf.variable(tf.scalar(random(1)));
   b = tf.variable(tf.scalar(random(1)));
   c = tf.variable(tf.scalar(random(1)));
+  d = tf.variable(tf.scalar(random(1)));
   learningSlider = createSlider(0, 2, 0.1, 0.05);
   learningSlider.style('width', '600px');
   learningSlider.input(() => {
@@ -24,7 +25,7 @@ function setup() {
 
 function predict(xs) {
   xs = tf.tensor1d(xs);
-  return xs.square().mul(a).add(xs.mul(b)).add(c);
+  return xs.mul(xs).mul(xs).mul(a).add(xs.square().mul(b)).add(xs.mul(c)).add(d);
 }
 
 function loss(pred, label) {
@@ -85,7 +86,8 @@ function draw() {
   text('a = ' + nf(a.dataSync(), 2, 4), 10, 25);
   text('b = ' + nf(b.dataSync(), 2, 4), 10, 50);
   text('c = ' + nf(c.dataSync(), 2, 4), 10, 75);
-  text('lr = ' + nf(learningSlider.value(), 2, 4), 10, 125);
+  text('d = ' + nf(d.dataSync(), 2, 4), 10, 100);
+  text('lr = ' + nf(learningSlider.value(), 2, 4), 10, 150);
 
 
 
